@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-4">
+            <h2>Juicy Burgers:</h2>
+            <div class="burgers" id="burgers-list">
+                {{#each burger}} {{#unless this.devoured}}
+                    <div class="alert alert-light">
+                        {{this.burger_name}}
+                        <div class="btn btn-primary" id="devour-btn" data-burgerid="{{this.id}}">Devour</div>
+                    </div> 
+                {{/unless}} {{/each}}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Add a Burger:</h2>
+            <div class="burgers" id="burgers-form">
+                <input placeholder="addBurger">
+                <div class="btn btn-primary" id="add-btn" data-burgerid="{{this.id}}">Add</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Devoured Burgers:</h2>
+            <div class="burgers" id="burgers-devoured">
+                {{#each burger}} {{#if this.devoured}}
+                    <div class="alert alert-light">
+                        {{this.burger_name}} <img src="assets/img/blobYum.png">
+                    </div>
+                {{/if}}{{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.ajax("/api/burgers", {
+        method: "GET"
+    }).then(data => {
+        console.log(data);
+    });
+
+    // Add New Burger
+    $("#add-btn").on("click", function() {
+        event.preventDefault();
+
+        var newBurger = {
+            burger_name: $("#addBurger").val(),
+            devoured: false
+        };
+        $.ajax("/api/burgers/new", {
+            method: "POST",
+            data: newBurger
+        }).then(function() {
+            console.log("added new burger");
+            location.reload();
+        });
+    });
+
+    // Update Burger (after being devoured)
+    $("#devour-btn").on("click", function() {
+        event.preventDefault();
+
+        var devouredBurger = {
+            burger_name: $("#addBurger").val(),
+            devoured: true
+        }
+
+        var id = $(this).data(“planid”);
+        $.ajax("/burgers/new" + id, {
+            type: "PUT",
+            data: devouredBurger
+        }).then(function(){
+            console.log("devoured burger");
+            location.assign("/");
+        });
+    });
+</script>

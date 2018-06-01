@@ -1,0 +1,56 @@
+body {
+    background: url('../img/burger-bg.png');
+    background-size: 100px;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+.pusheenburger img {
+    height: 200px;
+}
+
+.header {
+    background: rgba(255, 255, 255, .5);
+    padding: 20px;
+    text-align: center;
+}
+
+.columns {
+    margin: 0px;
+}
+
+.row {
+    margin-top: 50px;
+}
+
+.col-md-4 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: rgba(255, 255, 255, .6);
+}
+
+.alert {
+    border: 1px #000 dotted;
+}
+
+input {
+    width: 300px;
+    padding: 5px;
+}
+
+#devour-btn {
+    margin-left: 10px;
+    width: 110px;
+}
+
+#add-btn {
+    margin-top: 10px;
+    width: 300px;
+}
+
+.alert img {
+    height: 30px;
+    text-align: right;
+}
